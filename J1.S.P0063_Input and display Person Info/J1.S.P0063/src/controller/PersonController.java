@@ -13,7 +13,7 @@ import utils.StringUtils;
  * @author DELL
  */
 public class PersonController {
-    public static Person inputPersonInfo(String name, String address, String sSalary){
+    public Person inputPersonInfo(String name, String address, String sSalary){
         System.out.println("Input Information of Person");
         System.out.print("Please input name: ");
         name = StringUtils.checkInputString();
@@ -25,7 +25,7 @@ public class PersonController {
         return new Person(name, address, salary);
     }
     
-    public static void displayPersonInfo(Person person){
+    public void displayPersonInfo(Person person){
         System.out.println("Name: " + person.getName());
         System.out.println("Address: " + person.getAddress());
         System.out.println("Salary: " + person.getSalary());

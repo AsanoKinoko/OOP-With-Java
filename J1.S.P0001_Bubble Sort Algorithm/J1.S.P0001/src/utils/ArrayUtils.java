@@ -31,4 +31,12 @@ public class ArrayUtils {
         array[index1] = array[index2];
         array[index2] = temp;
     }
+    
+    public static int[] cloneArray(int[] array){
+        int[] ret = new int[array.length];
+        for(int i = 0; i < array.length; i++){
+            ret[i] = array[i];
+        }
+        return ret;
+    }
 }

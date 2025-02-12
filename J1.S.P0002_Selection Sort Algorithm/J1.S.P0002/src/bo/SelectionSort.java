@@ -17,22 +17,29 @@ public class SelectionSort {
         this.array = array;
     }
 
-    public int[] sort(boolean isAscending){ 
-        int n = array.length;
+    private int[] sort(boolean sortOnOriginArray, boolean isAscending){
+        int[] copyArray = null;
+        if(!sortOnOriginArray){
+            copyArray = ArrayUtils.cloneArray(array);
+        }
+        int n = copyArray.length;
         for (int i = 0; i < n - 1; i++) {
             // Assume the current position holds the minimum element
             int min_idx = i;
             // Iterate through the unsorted portion to find the actual minimum
             for (int j = i + 1; j < n; j++) {
-                if (isAscending ? (array[j] < array[min_idx]) : (array[j] > array[min_idx])) {
+                if (isAscending ? (copyArray[j] < copyArray[min_idx]) : (copyArray[j] > copyArray[min_idx])) {
                     // Update min_idx if a smaller element is found
                     min_idx = j;
                 }   
             }
             // Move minimum element to its correct position
-            ArrayUtils.swap(array, i, min_idx);         
+            ArrayUtils.swap(copyArray, i, min_idx);         
         }
-        return array;
+        return copyArray;
     }
     
+    public int[] getSortedArray(boolean isAscending) {
+        return sort(false, isAscending);
+    }
 }

@@ -27,10 +27,10 @@ public class J1SP0002 {
         ArrayUtils.displayIntArray(array);
         System.out.println();
         System.out.println("Ascending array:");
-        ArrayUtils.displayIntArray(ss.sort(true));
+        ArrayUtils.displayIntArray(ss.getSortedArray(true));
         System.out.println();
         System.out.println("Descending array:");
-        ArrayUtils.displayIntArray(ss.sort(false));
+        ArrayUtils.displayIntArray(ss.getSortedArray(false));
         System.out.println();
     }
     

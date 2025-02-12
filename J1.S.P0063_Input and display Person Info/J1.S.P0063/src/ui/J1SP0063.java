@@ -20,15 +20,17 @@ public class J1SP0063 {
      */
     public static void main(String[] args) {
         Person[] persons = new Person[3];
+        PersonController pc = new PersonController();
         System.out.println("=====Management Person programer=====");
         for (int i = 0; i < 3; i++) {
-            persons[i] = PersonController.inputPersonInfo("", "", "");
+            persons[i] = pc.inputPersonInfo("", "", "");
         }
         System.out.println();
         System.out.println("Information of Person you have entered:");
-        PersonSalaryManager.sortBySalary(persons, true);
+        PersonSalaryManager psm = new PersonSalaryManager(persons);
+        Person[] sortedPersons = psm.getSortedArray(persons, true);
         for (int i = 0; i < 3; i++){
-            PersonController.displayPersonInfo(persons[i]);
+            pc.displayPersonInfo(sortedPersons[i]);
         }
     }
 }

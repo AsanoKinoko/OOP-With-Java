@@ -5,6 +5,7 @@
 package bo;
 
 import model.Person;
+import utils.ArrayUtils;
 
 /**
  *
@@ -17,7 +18,7 @@ public class PersonSalaryManager {
         this.personArray = personArray;
     }
     
-    public static Person[] sortBySalary(Person[] person, boolean isAscending){
+    private Person[] sortBySalary(boolean sortOnOriginArray, Person[] person, boolean isAscending){
 //        // Check for empty array
 //        if (person.length == 0) {
 //            throw new Exception("Can't Sort Person");
@@ -29,16 +30,23 @@ public class PersonSalaryManager {
 //                throw new Exception("Can't Sort Person");
 //            }
 //        }
-
-        for (int i = 0; i < person.length; i++) {
-            for (int j = 0; j < person.length - i - 1; j++) {
-                if (isAscending ? (person[j].getSalary() > person[j + 1].getSalary()) : (person[j].getSalary() < person[j + 1].getSalary())){                    
-                    Person temp = person[j];
-                    person[j] = person[j + 1];
-                    person[j + 1] = temp;              
+        Person[] clonedArray = null;
+        if(!sortOnOriginArray){
+            clonedArray = ArrayUtils.cloneArray(person);
+        }
+        for (int i = 0; i < clonedArray.length; i++) {
+            for (int j = 0; j < clonedArray.length - i - 1; j++) {
+                if (isAscending ? (clonedArray[j].getSalary() > clonedArray[j + 1].getSalary()) : (clonedArray[j].getSalary() < clonedArray[j + 1].getSalary())){                    
+                    Person temp = clonedArray[j];
+                    clonedArray[j] = clonedArray[j + 1];
+                    clonedArray[j + 1] = temp;              
                 }                
             }
         }
-        return person;
+        return clonedArray;
+    }
+    
+    public Person[] getSortedArray(Person[] person, boolean isAscending) {
+        return sortBySalary(false, person, isAscending);
     }
 }

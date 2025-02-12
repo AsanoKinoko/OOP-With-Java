@@ -4,6 +4,8 @@
  */
 package bo;
 
+import utils.ArrayUtils;
+
 /**
  *
  * @author DELL
@@ -15,17 +17,25 @@ public class InsertionSort {
         this.array = array;
     }
     
-    public int[] sort(boolean isAscending){ 
-        int n = array.length;
+    private int[] sort(boolean sortOnOriginArray, boolean isAscending){
+        int[] copyArray = null;
+        if(!sortOnOriginArray){
+            copyArray = ArrayUtils.cloneArray(array);
+        }
+        int n = copyArray.length;
         for (int i = 1; i < n; ++i) {
-            int key = array[i];
+            int key = copyArray[i];
             int j = i - 1;
-            while (j >= 0 && (isAscending ? array[j] > key : array[j] < key)) {
-                array[j + 1] = array[j];
+            while (j >= 0 && (isAscending ? copyArray[j] > key : copyArray[j] < key)) {
+                copyArray[j + 1] = copyArray[j];
                 j = j - 1;
             }
-            array[j + 1] = key;
+            copyArray[j + 1] = key;
         }
-        return array;
+        return copyArray;
+    }
+    
+    public int[] getSortedArray(boolean isAscending) {
+        return sort(false, isAscending);
     }
 }

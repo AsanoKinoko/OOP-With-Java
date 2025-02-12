@@ -42,4 +42,8 @@ public class Person {
         this.address = address;
         this.salary = salary;
     }
+    
+    public Person clone() {
+        return new Person(this.getName(), this.getAddress(), this.getSalary());
+    }
 }

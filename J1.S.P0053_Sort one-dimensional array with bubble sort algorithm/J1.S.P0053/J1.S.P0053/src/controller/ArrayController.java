@@ -11,14 +11,14 @@ import utils.NumberUtils;
  * @author DELL
  */
 public class ArrayController {
-    public static int inputSizeOfArray() {
+    public int inputSizeOfArray() {
         System.out.println("Input Length Of Arrays");
         System.out.print("Enter number: ");
         int input = NumberUtils.inputPositiveInterger();
         return input;
     }
     
-    public static int[] inputValueOfArray() {
+    public int[] inputValueOfArray() {
         int size = inputSizeOfArray();
         int[] array = new int[size];
         for (int i = 0; i < size; i++) {

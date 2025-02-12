@@ -25,6 +25,7 @@ public class J1SP0053 {
             "Sort Descending",
             "Exit"
         };
+        ArrayController ac = new ArrayController();
         int[] arrayNeedSort = new int[0];
         BubbleSort bs = new BubbleSort(arrayNeedSort);
         
@@ -33,7 +34,7 @@ public class J1SP0053 {
             switch (choice) {
                 case 1:
                     System.out.println("----- Input Element -----");
-                    arrayNeedSort = ArrayController.inputValueOfArray();
+                    arrayNeedSort = ac.inputValueOfArray();
                     bs = new BubbleSort(arrayNeedSort);
                     break;
                 case 2:
@@ -43,7 +44,7 @@ public class J1SP0053 {
                     }
                     // Handle ascending sort
                     System.out.println("----- Ascending -----");
-                    ArrayUtils.displayIntArray(bs.sort(true), true);
+                    ArrayUtils.displayIntArray(bs.getSortedArray(true), true);
                     System.out.println();
                     break;
                 case 3:
@@ -53,7 +54,7 @@ public class J1SP0053 {
                     }
                     // Handle descending sort
                     System.out.println("----- Descending -----");
-                    ArrayUtils.displayIntArray(bs.sort(false), false);
+                    ArrayUtils.displayIntArray(bs.getSortedArray(false), false);
                     System.out.println();
                     break;
                 case 4:

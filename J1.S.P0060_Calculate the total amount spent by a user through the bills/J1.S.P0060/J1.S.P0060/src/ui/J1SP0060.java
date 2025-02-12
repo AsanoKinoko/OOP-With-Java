@@ -19,10 +19,11 @@ public class J1SP0060 {
      */
     public static void main(String[] args) {
         System.out.println("======= Shopping program ==========");
-        Person person = BillController.createPerson();
-        BillController.inputBills(person);
+        BillController bc = new BillController();
+        Person person = bc.createPerson();
+        bc.inputBills(person);
         System.out.println();
-        BillController.inputWallet(person);  
+        bc.inputWallet(person);  
         BillManager billManager = new BillManager(person);
         int total = billManager.calcTotal();
         System.out.println("This is total of bill: " + total);
