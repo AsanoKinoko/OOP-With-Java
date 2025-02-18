@@ -14,47 +14,44 @@ public class BinarySearch {
     private int[] array;
     
     public BinarySearch(int[] array) {
-        this.array = array;
+        BubbleSort bs = new BubbleSort(array);
+        this.array = bs.getSortedArray(true);
     }
     
-    private int[] sort(boolean sortOnOriginArray, boolean isAscending){
-        int[] copyArray = null;
-        if(!sortOnOriginArray){
-            copyArray = ArrayUtils.cloneArray(array);
-        }
-        for (int i = 0; i < copyArray.length; i++) {
-            for (int j = 0; j < copyArray.length - i - 1; j++) {
-                if (isAscending ? (copyArray[j] > copyArray[j + 1]) : (copyArray[j] < copyArray[j + 1])){                    
-                    ArrayUtils.swap(copyArray, j, j + 1);                    
-                }                
-            }
-        }
-        return copyArray;
-    }
-    
-    public int[] getSortedArray(boolean isAscending) {
-        return sort(false, isAscending);
-    }
-    
-    private int binarySearch(int[] sortedArray, int key){
-        int low = 0, high = sortedArray.length - 1;
+    private int binarySearch(int[] sortedArray, int key, boolean searchFirstIndex){
+        int low = 0;
+        int high = sortedArray.length - 1;
+        int result = -1;
         while (low <= high) {
             int mid = low + (high - low) / 2;
             // Check if x is present at mid
-            if (sortedArray[mid] == key){
-                return mid;
-            } else if(sortedArray[mid] < key){ // If x greater, ignore left half
+            if (sortedArray[mid] == key) {
+                result = mid;
+                if (searchFirstIndex) {
+                    high = mid - 1;  // Find the first position
+                } else {
+                    low = mid + 1;   // Find the last position
+                }
+            } else if (sortedArray[mid] < key) {
                 low = mid + 1;
-            } else { // If x is smaller, ignore right half
+            } else {
                 high = mid - 1;
             }
         }
         // If we reach here, then element was
         // Not present
-        return -1;
+        return result;
     }
     
-    public int search(int key) {
-        return binarySearch(getSortedArray(true), key);
+    public void findAllOccurrences(int key) {
+        int firstIndex = binarySearch(array, key, true);
+        int lastIndex = binarySearch(array, key, false);
+        if(firstIndex == -1){
+            System.out.println("Not found!");
+        } else {
+            for(int i = firstIndex; i <= lastIndex; i++){
+                System.out.println("Found " + key + " at index: " + i);
+            }
+        }
     }
 }

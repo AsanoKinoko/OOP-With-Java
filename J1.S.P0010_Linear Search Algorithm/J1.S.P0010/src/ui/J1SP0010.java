@@ -27,11 +27,13 @@ public class J1SP0010 {
         ArrayUtils.displayIntArray(array);
         LinearSearch ls = new LinearSearch(array);
         System.out.println();
-        int foundIndex = ls.search(numberToFind);
-        if(foundIndex == -1){
+        ArrayList<Integer> arrayIndex = ls.search(numberToFind);
+        if(arrayIndex.isEmpty()){
             System.out.println("Not found!");
         } else {
-            System.out.println("Found " + numberToFind + " at index: " + foundIndex);
+            for(int index : arrayIndex){
+                System.out.println("Found " + numberToFind + " at index: " + index);
+            }
         }        
     }
     

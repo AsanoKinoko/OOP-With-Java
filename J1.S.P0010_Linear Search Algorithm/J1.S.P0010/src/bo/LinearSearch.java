@@ -16,16 +16,17 @@ public class LinearSearch {
         this.array = array;
     }
 
-    private int linearSearch(int key){
+    private ArrayList<Integer> linearSearch(int key){
+        ArrayList<Integer> arrayIndex = new ArrayList<>();
         for (int i = 0; i < array.length; i++) {
             if(array[i] == key){
-                return i;
+                arrayIndex.add(i);
             }
         }
-        return -1;
+        return arrayIndex;
     }
     
-    public int search(int key) {
+    public ArrayList<Integer> search(int key) {
         return linearSearch(key);
     }
 }

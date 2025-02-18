@@ -21,18 +21,13 @@ public class J1SP0006 {
         System.out.println("Enter number of array:");
         int size = NumberUtils.inputPositiveInterger();
         int[] array = ArrayUtils.randomIntArray(size, -10, 10);
+        BubbleSort bs = new BubbleSort(array);
         System.out.println("Enter search value");
         int numberToFind = NumberUtils.inputInterger();
-        BinarySearch bs = new BinarySearch(array);
         System.out.print("Sorted array: ");
         ArrayUtils.displayIntArray(bs.getSortedArray(true));
         System.out.println();
-        int foundIndex = bs.search(numberToFind);
-        if(foundIndex == -1){
-            System.out.println("Not found!");
-        } else {
-            System.out.println("Found " + numberToFind + " at index: " + foundIndex);
-        }
-    }
-    
+        BinarySearch binarySearch = new BinarySearch(array);
+        binarySearch.findAllOccurrences(numberToFind);
+    }    
 }
