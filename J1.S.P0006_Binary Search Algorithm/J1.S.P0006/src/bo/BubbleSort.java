@@ -18,10 +18,7 @@ public class BubbleSort {
     }
     
     private int[] sort(boolean sortOnOriginArray, boolean isAscending){
-        int[] copyArray = null;
-        if(!sortOnOriginArray){
-            copyArray = ArrayUtils.cloneArray(array);
-        }
+        int[] copyArray = sortOnOriginArray ? array : ArrayUtils.cloneArray(array);
         for (int i = 0; i < copyArray.length; i++) {
             for (int j = 0; j < copyArray.length - i - 1; j++) {
                 if (isAscending ? (copyArray[j] > copyArray[j + 1]) : (copyArray[j] < copyArray[j + 1])){                    

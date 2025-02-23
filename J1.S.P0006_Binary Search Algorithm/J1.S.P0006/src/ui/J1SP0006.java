@@ -22,12 +22,20 @@ public class J1SP0006 {
         int size = NumberUtils.inputPositiveInterger();
         int[] array = ArrayUtils.randomIntArray(size, -10, 10);
         BubbleSort bs = new BubbleSort(array);
+        int[] sortedArray = bs.getSortedArray(true);
         System.out.println("Enter search value");
         int numberToFind = NumberUtils.inputInterger();
         System.out.print("Sorted array: ");
-        ArrayUtils.displayIntArray(bs.getSortedArray(true));
+        ArrayUtils.displayIntArray(sortedArray);
         System.out.println();
-        BinarySearch binarySearch = new BinarySearch(array);
-        binarySearch.findAllOccurrences(numberToFind);
+        BinarySearch binarySearch = new BinarySearch(sortedArray);
+        List<Integer> occurrences = binarySearch.findAllOccurrences(numberToFind);
+        if (occurrences.isEmpty()) {
+            System.out.println("Not found!");
+        } else {
+            for (int index : occurrences) {
+                System.out.println("Found " + numberToFind + " at index: " + index);
+            }
+        }
     }    
 }

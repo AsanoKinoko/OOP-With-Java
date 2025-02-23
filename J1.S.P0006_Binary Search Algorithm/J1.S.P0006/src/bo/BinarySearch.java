@@ -11,14 +11,13 @@ import utils.ArrayUtils;
  * @author DELL
  */
 public class BinarySearch {
-    private int[] array;
+    private int[] sortedArray;
     
-    public BinarySearch(int[] array) {
-        BubbleSort bs = new BubbleSort(array);
-        this.array = bs.getSortedArray(true);
+    public BinarySearch(int[] sortedArray) {
+        this.sortedArray = sortedArray;
     }
     
-    private int binarySearch(int[] sortedArray, int key, boolean searchFirstIndex){
+    private int binarySearch(int key, boolean searchFirstIndex){
         int low = 0;
         int high = sortedArray.length - 1;
         int result = -1;
@@ -43,15 +42,15 @@ public class BinarySearch {
         return result;
     }
     
-    public void findAllOccurrences(int key) {
-        int firstIndex = binarySearch(array, key, true);
-        int lastIndex = binarySearch(array, key, false);
-        if(firstIndex == -1){
-            System.out.println("Not found!");
-        } else {
-            for(int i = firstIndex; i <= lastIndex; i++){
-                System.out.println("Found " + key + " at index: " + i);
+    public List<Integer> findAllOccurrences(int key) {
+        List<Integer> occurrences = new ArrayList<>();
+        int firstIndex = binarySearch(key, true);
+        if(firstIndex != -1){
+            int lastIndex = binarySearch(key, false);
+            for (int i = firstIndex; i <= lastIndex; i++) {
+                occurrences.add(i);
             }
         }
+        return occurrences;
     }
 }
