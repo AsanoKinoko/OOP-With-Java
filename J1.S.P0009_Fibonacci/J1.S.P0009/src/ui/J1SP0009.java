@@ -22,7 +22,5 @@ public class J1SP0009 {
         System.out.println("The Fibonacci sequence consists of " + length + " elements: ");
         RecursiveFibonacci rf = new RecursiveFibonacci();
         rf.displayFibonacciArray(length);
-        System.out.println();
     }
-    
 }

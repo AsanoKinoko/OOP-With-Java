@@ -10,13 +10,16 @@ package bo;
  * @author DELL
  */
 public class LinearSearch {
-    private int[] array;
+    private final int[] array;
     
     public LinearSearch(int[] array) {
-        this.array = array;
+        if (array == null) {
+            throw new IllegalArgumentException("Array cannot be null");
+        }
+        this.array = ArrayUtils.cloneArray(array);
     }
 
-    private ArrayList<Integer> linearSearch(int key){
+    private ArrayList<Integer> doSearch(int key){
         ArrayList<Integer> arrayIndex = new ArrayList<>();
         for (int i = 0; i < array.length; i++) {
             if(array[i] == key){
@@ -27,6 +30,6 @@ public class LinearSearch {
     }
     
     public ArrayList<Integer> search(int key) {
-        return linearSearch(key);
+        return doSearch(key);
     }
 }
