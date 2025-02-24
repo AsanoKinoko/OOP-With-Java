@@ -13,15 +13,14 @@ import model.Person;
  * @author DELL
  */
 public class BillManager {
-    private Person person;
+    private List<Bill> bills;
     
-    public BillManager(Person person) {
-        this.person = person;
+    public BillManager(List<Bill> bills) {
+        this.bills = bills;
     }
     
     public int calcTotal() {
         int total = 0;
-        List<Bill> bills = person.getBills();
         for (Bill bill : bills) {
             total += bill.getAmount();
         }

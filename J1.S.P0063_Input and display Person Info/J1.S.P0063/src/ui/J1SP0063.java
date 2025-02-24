@@ -27,8 +27,8 @@ public class J1SP0063 {
         }
         System.out.println();
         System.out.println("Information of Person you have entered:");
-        PersonSalaryManager psm = new PersonSalaryManager(persons);
-        Person[] sortedPersons = psm.getSortedArray(persons, true);
+        PersonManager pm = new PersonManager(persons);
+        Person[] sortedPersons = pm.getSortedArray(persons, true);
         for (int i = 0; i < 3; i++){
             pc.displayPersonInfo(sortedPersons[i]);
         }

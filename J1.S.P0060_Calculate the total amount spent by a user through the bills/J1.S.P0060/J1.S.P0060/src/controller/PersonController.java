@@ -17,10 +17,20 @@ import utils.NumberUtils;
  * @author DELL
  */
 public class BillController {    
+    private List<Person> persons;
+    private BillManager billManager;
+    
+    public PersonController() {
+        this.persons = new ArrayList<>();
+    }
+
     public Person createPerson() {
         Wallet wallet = new Wallet();
         List<Bill> bills = new ArrayList<>();
-        return new Person(wallet, bills);
+        Person person = new Person(wallet, bills);
+        this.billManager = new BillManager(person.getBills());
+        persons.add(person);
+        return person;
     }
     
     public void inputBills(Person person) {
@@ -38,5 +48,14 @@ public class BillController {
         System.out.print("Input value of wallet: ");
         int balance = NumberUtils.inputPositiveInterger();
         person.getWallet().setBalance(balance);
+    }
+
+    public int calculateTotal() {
+        return billManager.calcTotal();
+    }
+    
+    public boolean canPay(Person person) {
+        int total = calculateTotal();
+        return billManager.payMoney(total, person.getWallet().getBalance());
     }
 }
