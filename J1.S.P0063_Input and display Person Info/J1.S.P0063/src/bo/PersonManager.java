@@ -11,10 +11,10 @@ import utils.ArrayUtils;
  *
  * @author DELL
  */
-public class PersonSalaryManager {
+public class PersonManager {
     private Person[] personArray;
     
-    public PersonSalaryManager(Person[] personArray) {
+    public PersonManager(Person[] personArray) {
         this.personArray = personArray;
     }
     
