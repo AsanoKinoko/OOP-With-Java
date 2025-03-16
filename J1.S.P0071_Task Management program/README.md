@@ -58,6 +58,17 @@ The system has four predefined task types:
 2. Run the Main class
 3. Follow the on-screen instructions to use the application
 
+## Triển khai OOP
+### 1. Tính đóng gói (Encapsulation)
+- Tất cả các thuộc tính trong các lớp như Task, TaskType đều được khai báo private và chỉ có thể truy cập thông qua các phương thức getter/setter.
+- Ví dụ: Trong lớp Task, các thuộc tính như id, taskTypeId, requirementName, v.v. đều được khai báo private và có các phương thức getter/setter tương ứng.
+
+### 2. Tính đa hình (Polymorphism)
+- Trong project này, tính đa hình được thể hiện qua việc ghi đè (override) phương thức toString() trong các lớp Task và TaskType để hiển thị thông tin theo định dạng riêng.
+
+### 3. Tính trừu tượng (Abstraction)
+- Project sử dụng các lớp như TaskManager, TaskController để trừu tượng hóa các thao tác phức tạp, giúp người dùng dễ dàng sử dụng mà không cần biết chi tiết bên trong.
+
 ## Tại sao ở Task và TaskType taskTypeId là int, planFrom planTo là double mà ở TaskManager và TaskController lại để nó là String xong ở Main chúng ta lại phải convert type của chúng?
 
 1. Tách biệt giữa giao diện người dùng và logic nghiệp vụ
