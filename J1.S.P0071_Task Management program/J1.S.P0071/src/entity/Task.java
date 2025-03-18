@@ -179,8 +179,8 @@ public class Task {
     @Override
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        return String.format("%-3d %-3d %-15s %-15s %-7.1f %-7.1f %-15s %-15s", 
-                id, taskTypeId, requirementName, dateFormat.format(date), 
-                planFrom, planTo, assignee, reviewer);
+        return String.format("%-3d %-15s %-15s %-15s %-7.1f %-15s %-15s", 
+                id, requirementName, taskTypeId, dateFormat.format(date), 
+                (planTo - planFrom), assignee, reviewer);
     }
 } 

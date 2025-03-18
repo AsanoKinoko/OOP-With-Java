@@ -3,6 +3,7 @@ package controller;
 import bo.TaskManager;
 import entity.Task;
 import entity.TaskType;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -81,6 +82,20 @@ public class TaskController {
         }
     }
     
+    private String formatTaskDisplay(Task task) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        TaskType taskType = findTaskTypeById(task.getTaskTypeId());
+        String typeName = taskType != null ? taskType.getName() : String.valueOf(task.getTaskTypeId());
+    
+        return String.format("%-3d %-15s %-15s %-15s %-7.1f %-15s %-15s", 
+            task.getId(), 
+            task.getRequirementName(), 
+            typeName, 
+            dateFormat.format(task.getDate()), 
+            (task.getPlanTo() - task.getPlanFrom()), 
+            task.getAssignee(), 
+            task.getReviewer());
+    }
     /**
      * Display all tasks
      */
@@ -92,11 +107,11 @@ public class TaskController {
         }
         
         System.out.println("----------------------------------------- Task ---------------------------------------");
-        System.out.printf("%-3s %-3s %-15s %-15s %-7s %-7s %-15s %-15s\n", 
-                "ID", "Type", "Requirement", "Date", "From", "To", "Assignee", "Reviewer");
+        System.out.printf("%-3s %-15s %-15s %-15s %-7s %-15s %-15s\n", 
+                "ID", "Name", "Task Type","Date", "Time", "Assignee", "Reviewer");
         
         for (Task task : tasks) {
-            System.out.println(task);
+            System.out.println(formatTaskDisplay(task));
         }
     }
 } 
