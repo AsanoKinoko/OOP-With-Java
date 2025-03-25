@@ -5,6 +5,7 @@
 package ui;
 
 import bo.BinarySearch;
+import java.util.List;
 import utils.ArrayUtils;
 import utils.NumberUtils;
 
@@ -20,15 +21,13 @@ public class J1SP0006 {
     public static void main(String[] args) {
         System.out.println("Enter number of array:");
         int size = NumberUtils.inputPositiveInterger();
-        int[] array = ArrayUtils.randomIntArray(size, -10, 10);
-        BubbleSort bs = new BubbleSort(array);
-        int[] sortedArray = bs.getSortedArray(true);
+        int[] array = ArrayUtils.randomIntArray(size, 2, 7);
         System.out.println("Enter search value");
         int numberToFind = NumberUtils.inputInterger();
+        BinarySearch binarySearch = new BinarySearch(array);
         System.out.print("Sorted array: ");
-        ArrayUtils.displayIntArray(sortedArray);
+        ArrayUtils.displayIntArray(binarySearch.getArray());
         System.out.println();
-        BinarySearch binarySearch = new BinarySearch(sortedArray);
         List<Integer> occurrences = binarySearch.findAllOccurrences(numberToFind);
         if (occurrences.isEmpty()) {
             System.out.println("Not found!");
@@ -37,5 +36,5 @@ public class J1SP0006 {
                 System.out.println("Found " + numberToFind + " at index: " + index);
             }
         }
-    }    
+    }
 }

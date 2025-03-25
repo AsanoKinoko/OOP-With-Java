@@ -4,34 +4,36 @@
  */
 package bo;
 
-import utils.ArrayUtils;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author DELL
  */
 public class BinarySearch {
-    private int[] sortedArray;
+    private int[] array;
     
-    public BinarySearch(int[] sortedArray) {
-        this.sortedArray = sortedArray;
+    public BinarySearch(int[] array) {
+        BubbleSort bubbleSort = new BubbleSort(array);
+        this.array = bubbleSort.getSortedArray(true);
     }
     
     private int binarySearch(int key, boolean searchFirstIndex){
         int low = 0;
-        int high = sortedArray.length - 1;
+        int high = array.length - 1;
         int result = -1;
         while (low <= high) {
             int mid = low + (high - low) / 2;
             // Check if x is present at mid
-            if (sortedArray[mid] == key) {
+            if (array[mid] == key) {
                 result = mid;
                 if (searchFirstIndex) {
                     high = mid - 1;  // Find the first position
                 } else {
                     low = mid + 1;   // Find the last position
                 }
-            } else if (sortedArray[mid] < key) {
+            } else if (array[mid] < key) {
                 low = mid + 1;
             } else {
                 high = mid - 1;
@@ -52,5 +54,9 @@ public class BinarySearch {
             }
         }
         return occurrences;
+    }
+    
+    public int[] getArray() {
+        return array;
     }
 }
