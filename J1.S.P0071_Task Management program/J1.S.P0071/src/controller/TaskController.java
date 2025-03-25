@@ -99,11 +99,11 @@ public class TaskController {
     /**
      * Display all tasks
      */
-    public void displayTasks() {
+    public boolean displayTasks() {
         List<Task> tasks = getDataTasks();
         if (tasks.isEmpty()) {
             System.out.println("No tasks found!");
-            return;
+            return false;
         }
         
         System.out.println("----------------------------------------- Task ---------------------------------------");
@@ -113,5 +113,6 @@ public class TaskController {
         for (Task task : tasks) {
             System.out.println(formatTaskDisplay(task));
         }
+        return true;
     }
 } 

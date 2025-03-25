@@ -84,15 +84,29 @@ public class J1SP0071 {
     private static void deleteTask() throws Exception {
         System.out.println("\n-------- Delete Task --------");
         
-        // Display current tasks
-        controller.displayTasks();
+        while(true){
+            // Display current tasks and check if there are any tasks
+            if (!controller.displayTasks()) {
+                return;
+            }
+            try{
+                // Get task ID to delete
+                int id = NumberUtils.inputPositiveInterger("Enter Task ID to delete: ");
         
-        // Get task ID to delete
-        int id = NumberUtils.inputPositiveInterger("Enter Task ID to delete: ");
-        
-        // Delete task
-        controller.deleteTask(String.valueOf(id));
-        System.out.println("Task deleted successfully!");
+                // Delete task
+                controller.deleteTask(String.valueOf(id));
+                System.out.println("Task deleted successfully!");
+                // Ask if user wants to continue deleting
+                if (!StringUtils.checkInputYesNo("Do you want to continue deleting task? (Y/N): ")) {
+                    break;
+                }
+            }catch(Exception e){
+                System.out.println("Error: " + e.getMessage());
+                if (!StringUtils.checkInputYesNo("Do you want to try again? (Y/N): ")) {
+                    break;
+                }
+            }
+        }
     }
     
     /**

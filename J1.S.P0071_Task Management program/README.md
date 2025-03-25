@@ -81,3 +81,24 @@ Bằng cách nhận dữ liệu dưới dạng String, các phương thức có 
 Trong yêu cầu của bài tập, có đề cập:
 Option 1: Add the task.
 o Implement function: public int addTask(String requirementName, String assignee, String, String, String taskTypeID expert date, String, the planTo planFrom String) throws Exception
+
+## Tại sao lại sử dụng kiểu boolean cho phương thức display tasks? Nếu như sử dụng kiểu int và trả về -1 có được không, sự khác nhau giữa 2 cách này là gì?
+
+Sự khác nhau giữa 2 cách này:
+Về mặt semantic (ngữ nghĩa):
+Boolean chỉ trả về true/false, phù hợp với câu hỏi "Có task nào để hiển thị không?"
+Int có thể mang nhiều thông tin hơn: -1 (không có task), 0 (danh sách rỗng), > 0 (số lượng task)
+Về mặt design:
+Boolean rõ ràng về mục đích: phương thức chỉ cho biết có thành công hay không
+Int linh hoạt hơn nhưng có thể gây nhầm lẫn về ý nghĩa của giá trị trả về (-1 có ý nghĩa gì? tại sao không là 0?)
+Về convention:
+Boolean thường được sử dụng cho các phương thức kiểm tra điều kiện (isXXX, hasXXX, canXXX)
+Int thường được sử dụng khi cần trả về số lượng hoặc index
+Về khả năng mở rộng:
+Boolean giới hạn ở 2 trạng thái
+Int cho phép mở rộng thêm các trạng thái khác trong tương lai (ví dụ: các mã lỗi khác nhau)
+Trong trường hợp này, boolean là lựa chọn phù hợp hơn vì:
+Mục đích của phương thức chỉ đơn giản là hiển thị và cho biết có task để hiển thị hay không
+Không cần thiết phải biết số lượng task (nếu cần có thể tạo phương thức riêng)
+Việc sử dụng -1 có thể gây nhầm lẫn và không tuân theo convention thông thường
+Code sẽ dễ đọc và dễ hiểu hơn với boolean
