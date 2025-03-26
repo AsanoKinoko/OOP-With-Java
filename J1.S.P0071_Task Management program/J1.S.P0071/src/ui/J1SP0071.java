@@ -86,9 +86,11 @@ public class J1SP0071 {
         
         while(true){
             // Display current tasks and check if there are any tasks
-            if (!controller.displayTasks()) {
+            if (!controller.hasTasks()) {
+                System.out.println("No tasks found!");
                 return;
             }
+            controller.displayTasks();
             try{
                 // Get task ID to delete
                 int id = NumberUtils.inputPositiveInterger("Enter Task ID to delete: ");

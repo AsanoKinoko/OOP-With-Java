@@ -22,6 +22,22 @@ The project follows Object-Oriented Programming principles with the following st
 - **utils**: Contains utility classes
   - `Validator.java`: Provides utility methods for input validation
 
+- ui package (J1SP0071):
+Calls to: controller, utils
+Returns no package
+- controller package (TaskController):
+Calls to: bo, utils
+Returns to: ui
+- bo package (TaskManager, TaskValidator):
+Calls to: entity, utils
+Returns to: controller
+- entity package (Task, TaskType):
+Calls to no package
+Returns to: bo, controller (when getting list)
+- utils package (DateUtils, StringUtils, NumberUtils, MenuUtils):
+Returns no other package
+Returns to: ui, controller, bo
+
 ## Features
 
 1. **Add Task**: Add a new task with the following information:
@@ -102,3 +118,16 @@ Mục đích của phương thức chỉ đơn giản là hiển thị và cho b
 Không cần thiết phải biết số lượng task (nếu cần có thể tạo phương thức riêng)
 Việc sử dụng -1 có thể gây nhầm lẫn và không tuân theo convention thông thường
 Code sẽ dễ đọc và dễ hiểu hơn với boolean
+
+## Tại sao giá trị mặc định của hàm findTaskIndexById return về lại là -1, ý nghĩa của nó là gì. Liệu có thể return về giá trị âm khác không, tại sao?
+
+Việc return -1 trong phương thức findTaskIndexById là một convention phổ biến trong lập trình khi tìm kiếm index với những lý do sau:
+Ý nghĩa của -1:
+Index trong List/Array luôn bắt đầu từ 0 và là số không âm
+-1 là giá trị không bao giờ là một index hợp lệ trong List/Array
+Khi một phương thức trả về -1, nó ngầm báo "không tìm thấy phần tử"
+Tại sao không dùng số âm khác (-2, -3,...):
+Có thể dùng được, nhưng không nên vì:
+-1 đã là convention được chấp nhận rộng rãi (ví dụ: String.indexOf(), ArrayList.indexOf())
+Người đọc code có thể bị nhầm lẫn về ý nghĩa của các số âm khác
+Không cần thiết phân biệt các trường hợp "không tìm thấy" khác nhau

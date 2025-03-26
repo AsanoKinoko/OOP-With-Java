@@ -54,6 +54,10 @@ public class TaskController {
         return taskManager.getDataTasks();
     }
     
+    public boolean hasTasks() {
+        return !getDataTasks().isEmpty();
+    }
+    
     /**
      * Get all task types
      * @return the list of all task types
@@ -99,11 +103,11 @@ public class TaskController {
     /**
      * Display all tasks
      */
-    public boolean displayTasks() {
+    public void displayTasks() {
         List<Task> tasks = getDataTasks();
         if (tasks.isEmpty()) {
             System.out.println("No tasks found!");
-            return false;
+            return;
         }
         
         System.out.println("----------------------------------------- Task ---------------------------------------");
@@ -113,6 +117,5 @@ public class TaskController {
         for (Task task : tasks) {
             System.out.println(formatTaskDisplay(task));
         }
-        return true;
     }
 } 
