@@ -6,6 +6,7 @@ package bo;
 
 import java.util.ArrayList;
 import java.util.List;
+import utils.ArrayUtils;
 
 /**
  *
@@ -15,7 +16,7 @@ public class BinarySearch {
     private int[] array;
     
     public BinarySearch(int[] array) {
-        BubbleSort bubbleSort = new BubbleSort(array);
+        BubbleSort bubbleSort = new BubbleSort(ArrayUtils.cloneArray(array));
         this.array = bubbleSort.getSortedArray(true);
     }
     
