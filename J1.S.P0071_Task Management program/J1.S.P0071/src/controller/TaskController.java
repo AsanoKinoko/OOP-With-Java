@@ -40,10 +40,11 @@ public class TaskController {
     /**
      * Delete a task by ID
      * @param id the ID of the task to delete
+     * @return the task that was deleted
      * @throws Exception if the task with the given ID doesn't exist
      */
-    public void deleteTask(String id) throws Exception {
-        taskManager.deleteTask(id);
+    public Task deleteTask(String id) throws Exception {
+        return taskManager.deleteTask(id);
     }
     
     /**

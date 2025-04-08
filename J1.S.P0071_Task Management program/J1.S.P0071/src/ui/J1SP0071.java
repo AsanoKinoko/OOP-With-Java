@@ -96,8 +96,8 @@ public class J1SP0071 {
                 int id = NumberUtils.inputPositiveInterger("Enter Task ID to delete: ");
         
                 // Delete task
-                controller.deleteTask(String.valueOf(id));
-                System.out.println("Task deleted successfully!");
+                Task deletedTask = controller.deleteTask(String.valueOf(id));
+                System.out.println("Deleted task: " + controller.formatTaskDisplay(deletedTask));
                 // Ask if user wants to continue deleting
                 if (!StringUtils.checkInputYesNo("Do you want to continue deleting task? (Y/N): ")) {
                     break;

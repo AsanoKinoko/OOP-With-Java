@@ -70,9 +70,10 @@ public class TaskManager {
     /**
      * Delete a task by ID
      * @param idString the ID of the task to delete in string format
+     * @return the task that was deleted
      * @throws Exception if the task with the given ID doesn't exist
      */
-    public void deleteTask(String idString) throws Exception {
+    public Task deleteTask(String idString) throws Exception {
         try {
             int id = Integer.parseInt(idString);
             int index = findTaskIndexById(id);
@@ -81,7 +82,9 @@ public class TaskManager {
                 throw new Exception("Task with ID " + id + " not found!");
             }
             
+            Task deletedTask = tasks.get(index);
             tasks.remove(index);
+            return deletedTask;
         } catch (NumberFormatException e) {
             throw new Exception("Invalid ID format. ID must be an integer.");
         }
