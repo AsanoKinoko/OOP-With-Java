@@ -4,7 +4,7 @@
  */
 package ui;
 
-import controller.NumberConvertController;
+import bo.NumberConverter;
 import utils.MenuUtils;
 import utils.StringUtils;
 
@@ -25,7 +25,7 @@ public class J1SP0011 {
             "Exit"
         };
         
-        NumberConvertController controller = new NumberConvertController();
+        NumberConverter numberConverter = new NumberConverter();
         
         while (true) {
             int choice = MenuUtils.getChoice("========= Number Convert program =========", options);
@@ -37,7 +37,7 @@ public class J1SP0011 {
                         choiceConvert = MenuUtils.displayConvert("Binary", "Decimal", "Hexadecimal");
                         input = StringUtils.checkInputString("Enter binary number: ");
                         try {
-                            String result = controller.convertNumber(input, 1, choiceConvert + 1);
+                            String result = numberConverter.convertNumber(input, 1, choiceConvert + 1);
                             System.out.println("Result: " + result);
                         } catch (IllegalArgumentException e) {
                             System.err.println("Invalid binary number!");
@@ -47,17 +47,17 @@ public class J1SP0011 {
                         choiceConvert = MenuUtils.displayConvert("Decimal", "Binary", "Hexadecimal");
                         input = StringUtils.checkInputString("Enter decimal number: ");
                         try {
-                            String result = controller.convertNumber(input, 2, choice == 1 ? 1 : 3);
+                            String result = numberConverter.convertNumber(input, 2, choiceConvert == 1 ? 1 : 3);
                             System.out.println("Result: " + result);
                         } catch (NumberFormatException e) {
                             System.err.println("Invalid decimal number!");
                         }
                         break;
                     case 3:
-                        choice = MenuUtils.displayConvert("Hexadecimal", "Binary", "Decimal");
+                        choiceConvert = MenuUtils.displayConvert("Hexadecimal", "Binary", "Decimal");
                         input = StringUtils.checkInputString("Enter hexadecimal number: ");
                         try {
-                            String result = controller.convertNumber(input, 3, choice);
+                            String result = numberConverter.convertNumber(input, 3, choiceConvert);
                             System.out.println("Result: " + result);
                         } catch (IllegalArgumentException e) {
                             System.err.println("Invalid hexadecimal number!");

@@ -14,7 +14,7 @@ public class NumberConverter {
         '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
     };
     
-    public int convertBinaryToDec(String binary) {
+    private int convertBinaryToDec(String binary) {
         int decimal = 0;
         int length = binary.length();
         
@@ -29,7 +29,7 @@ public class NumberConverter {
         return decimal;
     }
     
-    public String convertDecToBinary(int decimal) {
+    private String convertDecToBinary(int decimal) {
         if (decimal == 0) {
             return "0";
         }
@@ -45,7 +45,7 @@ public class NumberConverter {
         return binary.toString();
     }
     
-    public String convertDecToHex(int decimal) {
+    private String convertDecToHex(int decimal) {
         if (decimal == 0) {
             return "0";
         }
@@ -77,7 +77,7 @@ public class NumberConverter {
         throw new IllegalArgumentException("Invalid hexadecimal digit: " + hexChar);
     }
     
-    public int convertHexToDec(String hex) {
+    private int convertHexToDec(String hex) {
         hex = hex.toUpperCase();
         int decimal = 0;
         
@@ -88,5 +88,37 @@ public class NumberConverter {
         }
         
         return decimal;
+    }
+    
+    public String convertNumber(String input, int fromBase, int toBase) {
+        // First convert to decimal as intermediate step
+        int decimal;
+        
+        // Convert input to decimal based on source base
+        switch (fromBase) {
+            case 1: // Binary
+                decimal = convertBinaryToDec(input);
+                break;
+            case 2: // Decimal
+                decimal = Integer.parseInt(input);
+                break;
+            case 3: // Hexadecimal
+                decimal = convertHexToDec(input);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid source base");
+        }
+        
+        // Convert decimal to target base
+        switch (toBase) {
+            case 1: // Binary
+                return convertDecToBinary(decimal);
+            case 2: // Decimal
+                return String.valueOf(decimal);
+            case 3: // Hexadecimal
+                return convertDecToHex(decimal);
+            default:
+                throw new IllegalArgumentException("Invalid target base");
+        }
     }
 }
