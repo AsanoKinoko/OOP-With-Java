@@ -16,7 +16,7 @@ public class BinarySearch {
     private int[] array;
     
     public BinarySearch(int[] array) {
-        BubbleSort bubbleSort = new BubbleSort(ArrayUtils.cloneArray(array));
+        BubbleSort bubbleSort = new BubbleSort(array);
         this.array = bubbleSort.getSortedArray(true);
     }
     
