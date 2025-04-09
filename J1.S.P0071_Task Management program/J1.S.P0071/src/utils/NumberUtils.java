@@ -23,14 +23,14 @@ public class NumberUtils {
                 if (input.length() > maxInt.length() || 
                     (input.length() == maxInt.length() && input.compareTo(maxInt) >= 0)) {
                     System.err.println("Please input a number smaller than " + Integer.MAX_VALUE);
-                    System.out.print("Enter Number: ");
+                    System.out.print(title);
                     continue;
                 }
                 int result = Integer.parseInt(input);
                 return result;
             } catch (NumberFormatException e) {
                 System.err.println("Please input number");
-                System.out.print("Enter Number: ");
+                System.out.print(title);
             }
         }
     }
@@ -45,24 +45,24 @@ public class NumberUtils {
                 if (input.length() > maxInt.length() || 
                     (input.length() == maxInt.length() && input.compareTo(maxInt) >= 0)) {
                     System.err.println("Please input a number smaller than " + Integer.MAX_VALUE);
-                    System.out.print("Enter Number: ");
+                    System.out.print(title);
                     continue;
                 }
                 int result = Integer.parseInt(input);
                 if (result <= 0) {
-                    System.err.println("Please input number and number is greater than zero");
-                    System.out.print("Enter Number: ");
+                    System.err.println("Please input number is greater than zero");
+                    System.out.print(title);
                     continue;
                 }
                 return result;
             } catch (NumberFormatException e) {
-                System.err.println("Please input number and number is greater than zero");
-                System.out.print("Enter Number: ");
+                System.err.println("Please input number");
+                System.out.print(title);
             }
         }
     }
 
-    public static double inputPositiveDouble(String title) {
+    public static double inputDouble(String title) {
         System.out.print(title);
         // Loop until user input correct
         while (true) {
@@ -72,14 +72,14 @@ public class NumberUtils {
                 if (input.length() > maxDouble.length() || 
                     (input.length() == maxDouble.length() && input.compareTo(maxDouble) >= 0)) {
                     System.err.println("Please input a number smaller than " + Double.MAX_VALUE);
-                    System.out.print("Enter Number: ");
+                    System.out.print(title);
                     continue;
                 }
                 double result = Double.parseDouble(input);
                 return result;
             } catch (NumberFormatException e) {
                 System.err.println("Please input number");
-                System.out.print("Enter Number: ");
+                System.out.print(title);
             }
         }
     }

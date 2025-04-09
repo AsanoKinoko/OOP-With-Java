@@ -1,5 +1,6 @@
 package controller;
 
+import bo.TaskInputer;
 import bo.TaskManager;
 import entity.Task;
 import entity.TaskType;
@@ -11,6 +12,7 @@ import java.util.List;
  */
 public class TaskController {
     private TaskManager taskManager;
+    private TaskInputer taskInputer;
     
     /**
      * Constructor for TaskController
@@ -18,29 +20,30 @@ public class TaskController {
      */
     public TaskController() {
         taskManager = new TaskManager();
+        taskInputer = new TaskInputer();
     }
     
     /**
      * Add a new task
-     * @param requirementName the name of the requirement
-     * @param assignee the assignee of the task
-     * @param reviewer the reviewer of the task
-     * @param taskTypeId the ID of the task type
-     * @param date the date of the task
-     * @param planFrom the start time of the task
-     * @param planTo the end time of the task
      * @return the ID of the newly added task
      * @throws Exception if there's an error in the input data
      */
-    public int addTask(String requirementName, String assignee, String reviewer, 
-            String taskTypeId, String date, String planFrom, String planTo) throws Exception {
-        return taskManager.addTask(requirementName, assignee, reviewer, taskTypeId, date, planFrom, planTo);
+    public int addTask() throws Exception {
+        displayTaskTypes();
+        Task taskInput = taskInputer.inputTask();
+        return taskManager.addTask(
+                taskInput.getRequirementName(), 
+                taskInput.getAssignee(), 
+                taskInput.getReviewer(), 
+                String.valueOf(taskInput.getTaskTypeId()),
+                new SimpleDateFormat("dd-MM-yyyy").format(taskInput.getDate()), 
+                String.valueOf(taskInput.getPlanFrom()), 
+                String.valueOf(taskInput.getPlanTo()));
     }
     
     /**
      * Delete a task by ID
      * @param id the ID of the task to delete
-     * @return the task that was deleted
      * @throws Exception if the task with the given ID doesn't exist
      */
     public Task deleteTask(String id) throws Exception {
@@ -87,7 +90,7 @@ public class TaskController {
         }
     }
     
-    private String formatTaskDisplay(Task task) {
+    public String formatTaskDisplay(Task task) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         TaskType taskType = findTaskTypeById(task.getTaskTypeId());
         String typeName = taskType != null ? taskType.getName() : String.valueOf(task.getTaskTypeId());

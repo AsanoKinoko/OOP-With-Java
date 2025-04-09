@@ -20,6 +20,7 @@ public class StringUtils {
             String result = SCANNER.nextLine().trim();
             if (result.isEmpty()) {
                 System.err.println("Not empty.");
+                System.out.print(title);
             } else {
                 return result;
             }

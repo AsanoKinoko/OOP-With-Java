@@ -15,6 +15,10 @@ public class Task {
     private double planTo;
     private String assignee;
     private String reviewer;
+    
+    public Task(){
+        
+    }
 
     /**
      * Constructor for Task

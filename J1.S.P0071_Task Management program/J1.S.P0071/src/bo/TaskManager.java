@@ -45,25 +45,15 @@ public class TaskManager {
      */
     public int addTask(String requirementName, String assignee, String reviewer, 
             String taskTypeId, String dateString, String planFrom, String planTo) throws Exception {
-        TaskValidator taskValidator = new TaskValidator();
-        // Validate task type ID
-        int typeId = taskValidator.validateTaskTypeId(taskTypeId);
-        
+        int typeId = Integer.parseInt(taskTypeId);
         // Validate and parse date
         Date date = DateUtils.parseDate(dateString);
-        
-        // Validate and parse plan times
-        double from = taskValidator.validatePlanTime(planFrom);
-        double to = taskValidator.validatePlanTime(planTo);
-        
-        // Validate plan time range
-        taskValidator.validatePlanTimeRange(from, to);
-        
+        double from = Double.parseDouble(planFrom);
+        double to = Double.parseDouble(planTo);
         // Create and add the new task
         int id = ++lastId;
         Task newTask = new Task(id, typeId, requirementName, date, from, to, assignee, reviewer);
         tasks.add(newTask);
-        
         return id;
     }
 

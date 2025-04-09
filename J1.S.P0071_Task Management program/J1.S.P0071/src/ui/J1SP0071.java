@@ -5,7 +5,7 @@
 package ui;
 
 import controller.TaskController;
-import utils.DateUtils;
+import entity.Task;
 import utils.MenuUtils;
 import utils.NumberUtils;
 import utils.StringUtils;
@@ -32,13 +32,44 @@ public class J1SP0071 {
             try{
                 switch (choice) {
                     case 1:
-                        addTask();
+                        System.out.println("\n-------- Add Task --------");        
+                        // Add task
+                        int taskId = controller.addTask();
+                        System.out.println("Task added successfully with ID: " + taskId);
                         break;
                     case 2:
-                        deleteTask();
+                        System.out.println("\n-------- Delete Task --------");
+                        while(true){
+                            // Display current tasks and check if there are any tasks
+                            if (!controller.hasTasks()) {
+                                System.out.println("No tasks found!");
+                                return;
+                            }
+                            controller.displayTasks();
+                            try{
+                                // Get task ID to delete
+                                int id = NumberUtils.inputPositiveInterger("Enter Task ID to delete: ");
+        
+                                // Delete task
+                                Task deletedTask = controller.deleteTask(String.valueOf(id));
+                                //controller.deleteTask(String.valueOf(id));
+                                //System.out.println("Task deleted successfully!");
+                                System.out.println("Deleted task: " + controller.formatTaskDisplay(deletedTask));
+                                // Ask if user wants to continue deleting
+                                if (!StringUtils.checkInputYesNo("Do you want to continue deleting task? (Y/N): ")) {
+                                    break;
+                                }
+                            }catch(Exception e){
+                                System.out.println("Error: " + e.getMessage());
+                                if (!StringUtils.checkInputYesNo("Do you want to try again? (Y/N): ")) {
+                                    break;
+                                }
+                            }
+                        }
                         break;
                     case 3:
-                        showTasks();
+                        System.out.println("\n-------- Task List --------");
+                        controller.displayTasks();
                         break;
                     case 4:
                         System.exit(0);
@@ -51,71 +82,5 @@ public class J1SP0071 {
             }
             System.out.println();
         }
-    }
-    
-    /**
-     * Add a new task
-     * @throws Exception if there's an error in the input data
-     */
-    private static void addTask() throws Exception {
-        System.out.println("\n-------- Add Task --------");
-        
-        // Display task types
-        controller.displayTaskTypes();
-        
-        // Get task information from user
-        int taskTypeId = NumberUtils.inputPositiveInterger("Enter Task Type ID: ");
-        String requirementName = StringUtils.checkInputString("Enter Requirement Name: ");
-        String date = DateUtils.getDateString("Enter Date (dd-MM-yyyy): ");
-        double planFrom = NumberUtils.inputPositiveDouble("Enter Plan From (8.0-17.5): ");
-        double planTo = NumberUtils.inputPositiveDouble("Enter Plan To (8.0-17.5): ");
-        String assignee = StringUtils.checkInputString("Enter Assignee: ");
-        String reviewer = StringUtils.checkInputString("Enter Reviewer: ");
-        
-        // Add task
-        int taskId = controller.addTask(requirementName, assignee, reviewer, String.valueOf(taskTypeId), date, String.valueOf(planFrom), String.valueOf(planTo));
-        System.out.println("Task added successfully with ID: " + taskId);
-    }
-    
-    /**
-     * Delete a task
-     * @throws Exception if the task with the given ID doesn't exist
-     */
-    private static void deleteTask() throws Exception {
-        System.out.println("\n-------- Delete Task --------");
-        
-        while(true){
-            // Display current tasks and check if there are any tasks
-            if (!controller.hasTasks()) {
-                System.out.println("No tasks found!");
-                return;
-            }
-            controller.displayTasks();
-            try{
-                // Get task ID to delete
-                int id = NumberUtils.inputPositiveInterger("Enter Task ID to delete: ");
-        
-                // Delete task
-                Task deletedTask = controller.deleteTask(String.valueOf(id));
-                System.out.println("Deleted task: " + controller.formatTaskDisplay(deletedTask));
-                // Ask if user wants to continue deleting
-                if (!StringUtils.checkInputYesNo("Do you want to continue deleting task? (Y/N): ")) {
-                    break;
-                }
-            }catch(Exception e){
-                System.out.println("Error: " + e.getMessage());
-                if (!StringUtils.checkInputYesNo("Do you want to try again? (Y/N): ")) {
-                    break;
-                }
-            }
-        }
-    }
-    
-    /**
-     * Show all tasks
-     */
-    private static void showTasks() {
-        System.out.println("\n-------- Task List --------");
-        controller.displayTasks();
     }
 }
