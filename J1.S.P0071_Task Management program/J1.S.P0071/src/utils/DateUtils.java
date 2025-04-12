@@ -22,7 +22,11 @@ public class DateUtils {
             sdf.setLenient(false);
             return sdf.parse(dateString);
         } catch (ParseException e) {
-            throw new Exception("Invalid date format. Date must be in format dd-MM-yyyy.");
+            if (!dateString.matches("\\d{2}-\\d{2}-\\d{4}")) {
+                throw new Exception("Invalid date format. Date must be in format dd-MM-yyyy.");
+            }else{
+                throw new Exception("Invalid date.");
+            }
         }
     }
     

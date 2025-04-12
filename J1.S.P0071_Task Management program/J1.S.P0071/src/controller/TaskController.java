@@ -104,22 +104,4 @@ public class TaskController {
             task.getAssignee(), 
             task.getReviewer());
     }
-    /**
-     * Display all tasks
-     */
-    public void displayTasks() {
-        List<Task> tasks = getDataTasks();
-        if (tasks.isEmpty()) {
-            System.out.println("No tasks found!");
-            return;
-        }
-        
-        System.out.println("----------------------------------------- Task ---------------------------------------");
-        System.out.printf("%-3s %-15s %-15s %-15s %-7s %-15s %-15s\n", 
-                "ID", "Name", "Task Type","Date", "Time", "Assignee", "Reviewer");
-        
-        for (Task task : tasks) {
-            System.out.println(formatTaskDisplay(task));
-        }
-    }
 } 

@@ -6,6 +6,7 @@ package ui;
 
 import controller.TaskController;
 import entity.Task;
+import java.util.List;
 import utils.MenuUtils;
 import utils.NumberUtils;
 import utils.StringUtils;
@@ -41,11 +42,19 @@ public class J1SP0071 {
                         System.out.println("\n-------- Delete Task --------");
                         while(true){
                             // Display current tasks and check if there are any tasks
-                            if (!controller.hasTasks()) {
+                            List<Task> tasks = controller.getDataTasks();
+                            if (tasks.isEmpty()) {
                                 System.out.println("No tasks found!");
-                                return;
+                                break;
                             }
-                            controller.displayTasks();
+        
+                            System.out.println("----------------------------------------- Task ---------------------------------------");
+                            System.out.printf("%-3s %-15s %-15s %-15s %-7s %-15s %-15s\n", 
+                                "ID", "Name", "Task Type","Date", "Time", "Assignee", "Reviewer");
+        
+                            for (Task task : tasks) {
+                                System.out.println(controller.formatTaskDisplay(task));
+                            }
                             try{
                                 // Get task ID to delete
                                 int id = NumberUtils.inputPositiveInterger("Enter Task ID to delete: ");
@@ -69,7 +78,19 @@ public class J1SP0071 {
                         break;
                     case 3:
                         System.out.println("\n-------- Task List --------");
-                        controller.displayTasks();
+                        List<Task> tasks = controller.getDataTasks();
+                        if (tasks.isEmpty()) {
+                            System.out.println("No tasks found!");
+                            break;
+                        }
+        
+                        System.out.println("----------------------------------------- Task ---------------------------------------");
+                        System.out.printf("%-3s %-15s %-15s %-15s %-7s %-15s %-15s\n", 
+                            "ID", "Name", "Task Type","Date", "Time", "Assignee", "Reviewer");
+        
+                        for (Task task : tasks) {
+                            System.out.println(controller.formatTaskDisplay(task));
+                        }
                         break;
                     case 4:
                         System.exit(0);
